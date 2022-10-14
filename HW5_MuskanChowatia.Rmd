@@ -1,0 +1,43 @@
+---
+title: "HW5_MuskanChowatia"
+author: "mc2611@rutgers.edu"
+date: "2022-10-14"
+output: html_document
+---
+
+```{r}
+
+library(fpp)
+library(fpp2)
+
+head(austres)
+plot(austres)
+austres_decomp <- stl(austres,s.window ="periodic")
+plot(austres_decomp)
+attributes(austres_decomp)
+
+# printing out a seasonal adjustment
+seasadj(austres_decomp)
+
+# Plotting a line on the graph
+plot(austres)
+lines(seasadj(austres_decomp), col="Red")
+
+# Default period forecast
+f_graph <- forecast(austres_decomp)
+
+# Passing Number of Period
+f_graph <- forecast(austres_decomp,h=10)
+f_graph
+plot(f_graph)
+
+# Decomposition using many ways
+decomp_austres <- decompose(austres)
+
+# Results with different attributes 
+attributes(decomp_austres)
+seasadj(decomp_austres)
+
+```
+
+
